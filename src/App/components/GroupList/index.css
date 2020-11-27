@@ -1,0 +1,41 @@
+.group-title h2 {
+  display: inline-block;
+}
+
+.group-title button {
+  background-color: red;
+  color: white;
+  border: 0;
+  padding: 10px 25px;
+}
+
+.group-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.group-name {
+  height: 40px;
+  line-height: 40px;
+  background-color: #929aab;
+  color: white;
+  text-align: center;
+}
+
+.person-button {
+  width: 100px;
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
+  display: inline-block;
+  background-color: #eeeeee;
+  color: black;
+  margin: 20px;
+  padding: 0;
+}
+
+.group-item {
+  margin: 20px 0;
+  border: 1px solid;
+}
