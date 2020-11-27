@@ -5,7 +5,7 @@
   "license": "MIT",
   "scripts": {
     "start": "parcel index.html",
-    "server": "json-server --watch json-server/api.json -p 8080",
+    "server": "json-server --watch json-server/api.json",
     "test": "jest",
     "jest:watch": "jest --watch",
     "jest:coverage": "jest --coverage",
