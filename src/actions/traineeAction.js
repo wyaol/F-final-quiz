@@ -6,7 +6,7 @@ export const getTraineesNotGrouped = async () => {
 };
 
 export const addTrainee = async (name) => {
-  const response = await request.post('/trainees', { name });
+  const response = await request.post('/trainees', name);
   return response.data;
 };
 

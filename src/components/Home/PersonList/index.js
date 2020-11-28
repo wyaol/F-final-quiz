@@ -1,42 +1,28 @@
 import React, { Component } from 'react';
-import axios from 'axios';
 
 class PersonList extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      persons: [],
       isEditing: false,
     };
   }
 
-  componentDidMount() {
-    this.getPersons();
-  }
-
-  getPersons = () => {
-    axios.get('http://127.0.0.1:8080/students').then((response) => {
-      this.setState({
-        persons: response.data,
-      });
-    });
-  };
-
-  isEditing = (name) => {
-    axios.post('http://127.0.0.1:8080/students', { name }).then(() => {
-      this.getPersons();
-      this.setState({
-        isEditing: false,
-      });
-    });
+  onKeyDown = async (event) => {
+    if (event.keyCode === 13) {
+      const { addPerson } = this.props;
+      addPerson(event.target.value);
+    }
   };
 
   render() {
+    const { title, persons } = this.props;
+
     return (
       <div>
-        <h2>学员列表</h2>
+        <h2>{title}</h2>
         <div>
-          {this.state.persons.map((person) => (
+          {persons.map((person) => (
             <div key={person.id} className="person-button">
               {person.id}:{person.name}
             </div>
@@ -46,7 +32,7 @@ class PersonList extends Component {
               className="person-button"
               id="add-person"
               type="text"
-              onBlur={(e) => this.isEditing(e.target.value)}
+              onKeyDown={this.onKeyDown}
             />
           ) :  (
             <button
