@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import './index.css';
+import './index.scss';
+import PersonButton from '../PersonButton'
 
 class GroupList extends Component {
 
@@ -23,20 +24,14 @@ class GroupList extends Component {
           {groups.map((group) => (
             <div className="group-item" key={group.id}>
               <div className="group-name">
-                {group.name}
-                <div>
-                  {group.trainers.map((trainer) => (
-                    <div key={trainer.id}>
-                      {trainer.id}. {trainer.name}
-                    </div>
-                  ))}
-                </div>
+                <span className="group-name-text">{group.name}</span>
+                {group.trainers.map((trainer) => (
+                  <PersonButton key={trainer.id} value={`${trainer.id}. ${trainer.name}`} />
+                ))}
               </div>
               <div>
                 {group.trainees.map((trainee) => (
-                  <div className="person-button" key={trainee.id}>
-                    {trainee.id}. {trainee.name}
-                  </div>
+                  <PersonButton key={trainee.id} value={`${trainee.id}. ${trainee.name}`} />
                 ))}
               </div>
             </div>

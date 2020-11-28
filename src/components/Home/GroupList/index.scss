@@ -16,23 +16,17 @@
 }
 
 .group-name {
-  height: 40px;
-  line-height: 40px;
+  height: 60px;
+  line-height: 60px;
   background-color: #929aab;
   color: white;
   text-align: center;
-}
+  display: flex;
+  align-items: center;
 
-.person-button {
-  width: 100px;
-  height: 40px;
-  line-height: 40px;
-  text-align: center;
-  display: inline-block;
-  background-color: #eeeeee;
-  color: black;
-  margin: 20px;
-  padding: 0;
+  &-text {
+    width: 100%;
+  }
 }
 
 .group-item {

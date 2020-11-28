@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PersonButton from '../PersonButton'
 
 class PersonList extends Component {
   constructor(props) {
@@ -26,10 +27,7 @@ class PersonList extends Component {
         <h2>{title}</h2>
         <div>
           {persons.map((person) => (
-            <div key={person.id} className="person-button">
-              {person.id}. {person.name}
-            </div>
-          ))}
+            <PersonButton key={person.id} value={`${person.id}. ${person.name}`} /> ))}
           {this.state.isEditing ? (
             <input
               className="person-button"
