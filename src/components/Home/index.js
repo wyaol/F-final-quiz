@@ -4,22 +4,27 @@ import GroupList from './GroupList';
 import './index.css';
 import { getTraineesNotGrouped, addTrainee } from '../../actions/traineeAction';
 import { getTrainersNotGrouped, addTrainer } from '../../actions/trainerAction';
+import { getGroups, autoGrouping } from '../../actions/groupAction';
+
 
 class Home extends Component {
   constructor(props) {
     super(props);
     this.state = {
       trainees: [],
-      trainers: []
+      trainers: [],
+      groups: []
     };
   }
 
   async componentDidMount() {
+    const groups = await getGroups();
     const trainees = await getTraineesNotGrouped();
     const trainers = await getTrainersNotGrouped();
     this.setState({
       trainees,
-      trainers
+      trainers,
+      groups
     })
   }
 
@@ -33,10 +38,23 @@ class Home extends Component {
     this.setState(prev => prev.trainers.push(trainer));
   }
 
+  autoGrouping = async () => {
+    const groups = await autoGrouping();
+    this.setState({groups});
+    const trainees = await getTraineesNotGrouped();
+    const trainers = await getTrainersNotGrouped();
+    this.setState({
+      trainees,
+      trainers
+    })
+  }
+
   render() {
     return (
       <div className="container">
-        <GroupList />
+        <GroupList 
+          groups={this.state.groups}
+          autoGrouping={ this.autoGrouping } />
         <PersonList
           title="讲师列表"
           persons={this.state.trainers}

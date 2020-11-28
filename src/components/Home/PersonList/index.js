@@ -12,6 +12,9 @@ class PersonList extends Component {
     if (event.keyCode === 13) {
       const { addPerson } = this.props;
       addPerson(event.target.value);
+      this.setState({
+        isEditing:false
+      })
     }
   };
 
@@ -24,7 +27,7 @@ class PersonList extends Component {
         <div>
           {persons.map((person) => (
             <div key={person.id} className="person-button">
-              {person.id}:{person.name}
+              {person.id}. {person.name}
             </div>
           ))}
           {this.state.isEditing ? (
