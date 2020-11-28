@@ -41,21 +41,20 @@ class PersonList extends Component {
               {person.id}:{person.name}
             </div>
           ))}
-          {this.state.isEditing && (
+          {this.state.isEditing ? (
             <input
               className="person-button"
               id="add-person"
               type="text"
               onBlur={(e) => this.isEditing(e.target.value)}
             />
-          )}
-          {!this.state.isEditing && (
+          ) :  (
             <button
               type="button"
               onClick={() => this.setState({ isEditing: true })}
               className="person-button"
             >
-              +添加成员
+              + 添加成员
             </button>
           )}
         </div>
