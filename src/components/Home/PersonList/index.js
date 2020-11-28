@@ -6,7 +6,7 @@ class PersonList extends Component {
     super(props);
     this.state = {
       persons: [],
-      addPerson: false,
+      isEditing: false,
     };
   }
 
@@ -22,11 +22,11 @@ class PersonList extends Component {
     });
   };
 
-  addPerson = (name) => {
+  isEditing = (name) => {
     axios.post('http://127.0.0.1:8080/students', { name }).then(() => {
       this.getPersons();
       this.setState({
-        addPerson: false,
+        isEditing: false,
       });
     });
   };
@@ -41,18 +41,18 @@ class PersonList extends Component {
               {person.id}:{person.name}
             </div>
           ))}
-          {this.state.addPerson && (
+          {this.state.isEditing && (
             <input
               className="person-button"
               id="add-person"
               type="text"
-              onBlur={(e) => this.addPerson(e.target.value)}
+              onBlur={(e) => this.isEditing(e.target.value)}
             />
           )}
-          {!this.state.addPerson && (
+          {!this.state.isEditing && (
             <button
               type="button"
-              onClick={() => this.setState({ addPerson: true })}
+              onClick={() => this.setState({ isEditing: true })}
               className="person-button"
             >
               +添加成员
