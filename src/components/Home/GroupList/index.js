@@ -1,16 +1,15 @@
 import React, { Component } from 'react';
 import './index.scss';
-import PersonButton from '../PersonButton'
+import PersonButton from '../PersonButton';
 
 class GroupList extends Component {
-
   autoGrouping = async () => {
     const { autoGrouping } = this.props;
     autoGrouping();
   };
 
   render() {
-    const { groups } = this.props;
+    const { groups, deleteTrainee, deleteTrainer } = this.props;
 
     return (
       <div>
@@ -24,14 +23,24 @@ class GroupList extends Component {
           {groups.map((group) => (
             <div className="group-item" key={group.id}>
               <div className="group-name">
-                <span className="group-name-text">{group.name}</span>
-                {group.trainers.map((trainer) => (
-                  <PersonButton key={trainer.id} value={`${trainer.id}. ${trainer.name}`} />
-                ))}
+                {group.name}
+                <div className="group-name-trainers">
+                  {group.trainers.map((trainer) => (
+                    <PersonButton
+                      key={trainer.id}
+                      value={`${trainer.id}. ${trainer.name}`}
+                      deleteItem={() => deleteTrainer(trainer.id)}
+                    />
+                  ))}
+                </div>
               </div>
-              <div>
+              <div className="button-list">
                 {group.trainees.map((trainee) => (
-                  <PersonButton key={trainee.id} value={`${trainee.id}. ${trainee.name}`} />
+                  <PersonButton
+                    key={trainee.id}
+                    value={`${trainee.id}. ${trainee.name}`}
+                    deleteItem={() => deleteTrainee(trainee.id)}
+                  />
                 ))}
               </div>
             </div>

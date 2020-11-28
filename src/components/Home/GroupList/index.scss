@@ -21,11 +21,19 @@
   background-color: #929aab;
   color: white;
   text-align: center;
-  display: flex;
-  align-items: center;
+  position: relative;
 
-  &-text {
-    width: 100%;
+  &-trainers {
+    display: inline-block;
+    position: absolute;
+    right: 35px;
+    .person-button-delete {
+      top: 10px;
+    }
+  }
+
+  .person-button {
+    margin-left: 35px;
   }
 }
 

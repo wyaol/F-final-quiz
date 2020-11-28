@@ -2,10 +2,9 @@ import React, { Component } from 'react';
 import PersonList from './PersonList';
 import GroupList from './GroupList';
 import './index.css';
-import { getTraineesNotGrouped, addTrainee } from '../../actions/traineeAction';
-import { getTrainersNotGrouped, addTrainer } from '../../actions/trainerAction';
+import { getTraineesNotGrouped, addTrainee, deleteTrainee } from '../../actions/traineeAction';
+import { getTrainersNotGrouped, addTrainer, deleteTrainer } from '../../actions/trainerAction';
 import { getGroups, autoGrouping } from '../../actions/groupAction';
-
 
 class Home extends Component {
   constructor(props) {
@@ -13,7 +12,7 @@ class Home extends Component {
     this.state = {
       trainees: [],
       trainers: [],
-      groups: []
+      groups: [],
     };
   }
 
@@ -24,45 +23,52 @@ class Home extends Component {
     this.setState({
       trainees,
       trainers,
-      groups
-    })
+      groups,
+    });
   }
 
   addTrainee = async (name) => {
     const trainee = await addTrainee(name);
-    this.setState(prev => prev.trainees.push(trainee));
-  }
+    this.setState((prev) => prev.trainees.push(trainee));
+  };
 
   addTrainer = async (name) => {
     const trainer = await addTrainer(name);
-    this.setState(prev => prev.trainers.push(trainer));
-  }
+    this.setState((prev) => prev.trainers.push(trainer));
+  };
 
   autoGrouping = async () => {
     const groups = await autoGrouping();
-    this.setState({groups});
+    this.setState({ groups });
     const trainees = await getTraineesNotGrouped();
     const trainers = await getTrainersNotGrouped();
     this.setState({
       trainees,
-      trainers
-    })
-  }
+      trainers,
+    });
+  };
 
   render() {
     return (
       <div className="container">
-        <GroupList 
+        <GroupList
           groups={this.state.groups}
-          autoGrouping={ this.autoGrouping } />
+          autoGrouping={this.autoGrouping}
+          deleteTrainee={deleteTrainee}
+          deleteTrainer={deleteTrainer}
+        />
         <PersonList
           title="讲师列表"
           persons={this.state.trainers}
-          addPerson={this.addTrainer} />
-        <PersonList 
+          addPerson={this.addTrainer}
+          deleteItem={deleteTrainer}
+        />
+        <PersonList
           persons={this.state.trainees}
-          title="学员列表" 
-          addPerson={this.addTrainee} />
+          title="学员列表"
+          addPerson={this.addTrainee}
+          deleteItem={deleteTrainee}
+        />
       </div>
     );
   }

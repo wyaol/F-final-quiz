@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import PersonButton from '../PersonButton'
+import PersonButton from '../PersonButton';
 
 class PersonList extends Component {
   constructor(props) {
@@ -14,35 +14,44 @@ class PersonList extends Component {
       const { addPerson } = this.props;
       addPerson(event.target.value);
       this.setState({
-        isEditing:false
-      })
+        isEditing: false,
+      });
     }
   };
 
   render() {
-    const { title, persons } = this.props;
+    const { title, persons, deleteItem } = this.props;
 
     return (
       <div>
         <h2>{title}</h2>
-        <div>
+        <div className="button-list">
           {persons.map((person) => (
-            <PersonButton key={person.id} value={`${person.id}. ${person.name}`} /> ))}
-          {this.state.isEditing ? (
-            <input
-              className="person-button"
-              id="add-person"
-              type="text"
-              onKeyDown={this.onKeyDown}
+            <PersonButton
+              key={person.id}
+              value={`${person.id}. ${person.name}`}
+              deleteItem={() => deleteItem(person.id)}
             />
-          ) :  (
-            <button
-              type="button"
-              onClick={() => this.setState({ isEditing: true })}
-              className="person-button"
-            >
-              + 添加成员
-            </button>
+          ))}
+          {this.state.isEditing ? (
+            <div className="person-button">
+              <input
+                className="person-button-content"
+                id="add-person"
+                type="text"
+                onKeyDown={this.onKeyDown}
+              />
+            </div>
+          ) : (
+            <div className="person-button">
+              <button
+                type="button"
+                onClick={() => this.setState({ isEditing: true })}
+                className="person-button-content"
+              >
+                + 添加成员
+              </button>
+            </div>
           )}
         </div>
       </div>
