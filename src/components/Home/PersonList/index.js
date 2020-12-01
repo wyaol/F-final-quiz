@@ -60,3 +60,4 @@ class PersonList extends Component {
 }
 
 export default PersonList;
+// TODO GTB-知识点: * 建议将addPerson抽取单独组件, html注意语义化标签的使用
